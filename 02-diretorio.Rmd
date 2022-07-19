@@ -1,0 +1,78 @@
+# Diretório de trabalho
+
+## Localizando arquivos
+
+Antes de abrir um arquivo, você precisa dizer ao R onde encontrá-lo. Podemos fazer isso fornecendo um caminho completo para seu arquivo no sistema.
+
+Tenha cuidado em utilizar barras `/` (barra comum ou travessa) e não barras inversas `\` (invertida ou contrabarra), que aparecem quando você copia um caminho de arquivo no sistema Windows.
+
+Você pode economizar tempo dando ao R um diretório de trabalho.
+
+
+## Diretório de trabalho
+
+O diretório de trabalho é o local padrão onde o R procurará os arquivos que você deseja carregar e onde colocará os arquivos que você salvar. Uma das grandes vantagens de usar o RStudio Projects é que, quando você abre um projeto, ele define automaticamente seu diretório de trabalho para o local apropriado. Você pode verificar o caminho do arquivo do seu diretório de trabalho observando a barra na parte superior do painel Console. 
+
+Nota: o símbolo ~ acima é uma abreviação para /Users/pedroamparo/ em um computador Mac (o mesmo em computadores Linux).
+
+```{r, echo = FALSE, fig.align = "center"}
+knitr::include_graphics("figuras/diretorio.png", dpi = 220)
+```
+
+Você também pode usar a função `getwd()` no Console que retorna o caminho do arquivo do diretório de trabalho atual.
+
+```{r}
+getwd()
+```
+
+Em um computador baseado em Windows, nosso diretório de trabalho também inclui uma letra de unidade (ou seja: C:/Users/pedroleite/OneDrive - Pan American Health Organization/OPAS/Curso R/cursoR_aula5).
+
+Se você não estivesse usando um projeto, teria que definir seu diretório de trabalho usando a função `setwd()` no início de cada script.
+
+```{r, eval=F}
+setwd("/Users/pedroleite/OneDrive - Pan American Health Organization/OPAS/Curso R/cursoR_aula5")
+```
+
+No entanto, o problema com `setwd()` é que ele usa um caminho de arquivo absoluto que é específico para o computador em que você está trabalhando. Se você quiser enviar seu script para outra pessoa (ou se estiver trabalhando em um computador diferente), este caminho de arquivo absoluto não funcionará no computador de seu amigo/colega, pois a configuração do diretório será diferente (é improvável que você tenha uma estrutura de diretórios /Users/nhy163/Documents/Alex/Teaching/ em seu computador). 
+
+Isso resulta em um projeto que não é autocontido e não é facilmente portátil. O RStudio resolve esse problema permitindo que você use caminhos de arquivos relativos que são relativos ao diretório do projeto Raiz. O diretório do projeto Root é apenas o diretório que contém o arquivo .Rproj (first_project.Rproj em nosso caso). Se você quiser compartilhar sua análise com outra pessoa, tudo que você precisa fazer é copiar todo o diretório do projeto e enviar para o seu colaborador. Eles precisariam apenas abrir o arquivo de projeto e quaisquer scripts R que contenham referências a caminhos de arquivos relativos funcionarão. 
+
+Por exemplo, digamos que você criou um subdiretório chamado raw_data em seu diretório de projeto raiz que contém um arquivo de dados delimitado por tabulação chamado mydata.txt (vamos abordar as estruturas de diretório abaixo). Para importar este arquivo de dados em um projeto RStudio usando a função read.table() (não se preocupe com isso agora, abordaremos isso com muito mais detalhes no Capítulo 3) tudo o que você precisa incluir em seu script R é
+
+## Estrutura de diretórios
+
+Além de usar o RStudio Projects, também é uma boa prática estruturar seu diretório de trabalho de maneira consistente e lógica para ajudar você e seus colaboradores. Frequentemente usamos a seguinte estrutura de diretórios em nossos projetos baseados em R.
+
+Em nosso diretório de trabalho temos os seguintes diretórios:
+
+Raiz - Este é o diretório do seu projeto contendo seu arquivo .Rproj.
+
+data - Armazenamos todos os nossos dados neste diretório. O subdiretório chamado raw_data contém arquivos de dados brutos e apenas arquivos de dados brutos. Esses arquivos devem ser tratados como somente leitura e não devem ser alterados de forma alguma. Se você precisar processar/limpar/modificar seus dados, faça isso no R (não no MS Excel), pois você pode documentar (e justificar) quaisquer alterações feitas. Quaisquer dados processados ​​devem ser salvos em um arquivo separado e armazenados no subdiretório processados_dados. Informações sobre métodos de coleta de dados, detalhes de download de dados e quaisquer outros metadados úteis devem ser salvos em um documento de texto (consulte os arquivos de texto README abaixo) no subdiretório de metadados.
+
+R - Este é um diretório opcional onde salvamos todas as funções personalizadas do R que escrevemos para a análise atual. Estes podem então ser originados em R usando a função source().
+
+Rmd - Um diretório opcional onde salvamos nossos documentos R markdown.
+
+scripts - Todos os principais scripts R que escrevemos para o projeto atual são salvos aqui.
+
+output - As saídas de nossos scripts R, como gráficos, arquivos HTML e resumos de dados, são salvas neste diretório. Isso ajuda a nós e nossos colaboradores a distinguir quais arquivos são saídas e quais são arquivos de origem.
+
+Obviamente, a estrutura descrita acima é exatamente o que funciona para nós na maioria das vezes e deve ser vista como um ponto de partida para suas próprias necessidades. Costumamos ter uma estrutura de diretórios bastante consistente em nossos projetos, pois isso nos permite nos orientar rapidamente quando voltamos a um projeto depois de um tempo. Dito isto, projetos diferentes terão requisitos diferentes, então adicionamos e removemos diretórios conforme necessário.
+
+Você pode criar sua estrutura de diretórios usando o Windows Explorer (ou Finder em um Mac) ou no RStudio clicando no botão 'Nova pasta' no painel 'Arquivos'.
+
+Uma abordagem alternativa é usar as funções `dir.create()` e `list.files()` no R Console.
+
+```{r}
+# create directory called 'data'
+dir.create('data')
+
+# create subdirectory raw_data in the data directory
+dir.create('data/raw_data')
+
+# list the files and directories
+list.files(recursive = TRUE, include.dirs = TRUE)
+```
+
+
+Ref.: https://intro2r.com/

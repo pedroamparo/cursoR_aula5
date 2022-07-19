@@ -1,0 +1,41 @@
+# Trabalhando em ambiente de projetos
+
+Certos aspectos da análise de dados podem não ser tão agradáveis. Por exemplo:
+
+* Manter o controle de todos os arquivos que meu projeto gera.
+* Data wrangling (Disputa de dados).
+
+## Criando um projeto no R
+
+Ao trabalhar em um projeto, você provavelmente cria muitos arquivos diferentes para vários propósitos, especialmente R Scripts. Se você não tomar cuidado, esse arquivo será armazenado no local padrão do seu sistema, que pode não estar onde você deseja. 
+
+O RStudio permite que você gerencie todo o seu projeto de forma intuitiva e conveniente através dos arquivos do R Project. O uso de arquivos do R Project vem com algumas vantagens, por exemplo:
+
+* Todos os arquivos que você gera estão no mesmo lugar. Seus dados, seus códigos, seus plots (gráficos), seus relatórios, etc., estão todos juntos em um só lugar sem que você precise gerenciar os arquivos manualmente. Isso se deve ao fato de o RStudio definir o diretório raiz para a pasta em que seu projeto foi salvo.
+
+* Se você deseja compartilhar seu projeto, pode compartilhar a pasta inteira e outras pessoas podem reproduzir rapidamente sua pesquisa ou ajudar a corrigir problemas. Isso ocorre porque todos os caminhos de arquivo são relativos e não absolutos.
+
+* Você pode, mais facilmente, usar o GitHub para backups e o chamado 'controle de versão', que permite rastrear as alterações feitas em seu código ao longo do tempo.
+
+Por enquanto, o motivo mais importante para usar os arquivos do R Project é a conveniência da organização dos arquivos e a capacidade de compartilhá-los facilmente com colegas.
+
+Para criar um projeto no R:
+
+1. Selecione `File > New Project` da barra de menu.
+
+
+2. Selecione `New Directory` da janela pop-up.
+
+```{r, echo = FALSE, fig.align = "center"}
+knitr::include_graphics("figuras/projects_new.png", dpi = 220)
+```
+
+3. Selecione `Novo Projeto`.
+
+## Organizando seu projeto
+
+Esta seção não está diretamente relacionada ao RStudio, R ou análise de dados em geral. Em vez disso, quero transmitir a você que uma boa estrutura de pastas pode percorrer um longo caminho. 
+
+É um excelente hábito começar a pensar em estruturas de pastas antes de começar a trabalhar em seu projeto. Colocar seus arquivos em pastas dedicadas, em vez de mantê-los soltos em um contêiner, acelerará seu trabalho e evitará a frustração de não encontrar os arquivos necessários. Eu tenho um modelo que uso regularmente. Você pode criá-lo do zero no RStudio ou abrir seu navegador de arquivos e criar as pastas lá. O RStudio não se importa com a maneira como você faz isso. Se você quiser gastar menos tempo configurando isso, você pode usar a função create_project_folder() do pacote r4np. Ele cria todas as pastas conforme mostrado na figura abaixo:
+
+Você provavelmente notou que minhas pastas têm números na frente delas. Faço isso para garantir que todas as pastas estejam na ordem que desejo, que geralmente não é a ordem alfabética que meu computador sugere. Eu uso dois dígitos porque posso ter mais de nove pastas para um projeto, e a pasta dez seria listada como a terceira pasta nesta lista. Com essa estratégia de arquivamento, será fácil encontrar o que eu preciso. Até mesmo outros podem entender facilmente o que armazenei onde. É simplesmente “arrumado”, semelhante a como queremos que nossos dados sejam.
